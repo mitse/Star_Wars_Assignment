@@ -5,20 +5,29 @@ import getMovies from '../services/movieService';
 
 class MoviesLayout extends Component {
     state = {
-        movies: []
+        movies: [],
+        selectedMovie: null,
     };
 
     async componentDidMount() {
         const movies = await getMovies();
         this.setState({ movies });
-        console.log(movies);
     }
 
+    handleMovieSelect = (movie) => {
+        this.setState({ selectedMovie: movie });
+      }
+
     render() {
+        const {movies, selectedMovie} = this.state;
         return (
             <main className="container">
-                <ToolBar/>
-                <Movies/>
+                <ToolBar />
+                <Movies
+                    movies={movies}
+                    selectedMovie={selectedMovie}
+                    onMovieSelect={this.handleMovieSelect}
+                />
             </main>
         );
     }

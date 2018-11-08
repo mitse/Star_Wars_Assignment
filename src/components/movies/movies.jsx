@@ -3,12 +3,15 @@ import MoviesList from './moviesList';
 import MovieDetails from './movieDetails';
 
 const Movies = (props) => {
-  
+    const { movies,selectedMovie,onMovieSelect } = props;
     return (
         <div className="movies-container">
-            <MoviesList/>
+            <MoviesList 
+              movies={movies} 
+              onMovieSelect={onMovieSelect}
+            />
             <div className="horizontal-line"></div>
-            <MovieDetails/>
+            <MovieDetails selectedMovie={selectedMovie} />
         </div>
     );
 }
