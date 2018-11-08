@@ -1,0 +1,10 @@
+import React from 'react';
+
+const MoviesList = () => {
+
+    return (
+       <h1>moviesList</h1>
+    );
+}
+
+export default MoviesList;
