@@ -23,8 +23,23 @@ class MoviesLayout extends Component {
         this.setState({ searchQuery: text });
     }
 
+    getFilteredMovies = () => {
+        const { movies, searchQuery } = this.state;
+        let filteredMovies;
+
+        if (searchQuery) {
+            filteredMovies = movies.filter(movie =>
+                movie.title.toLowerCase().includes(searchQuery.toLowerCase())
+            );
+        } else
+            filteredMovies = movies;
+
+        return filteredMovies;
+    }
+
     render() {
-        const { movies, selectedMovie, searchQuery } = this.state;
+        const { selectedMovie, searchQuery } = this.state;
+        const movies = this.getFilteredMovies();
         return (
             <main className="container">
                 <ToolBar
