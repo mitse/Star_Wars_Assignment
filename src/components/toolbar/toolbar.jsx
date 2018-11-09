@@ -3,10 +3,10 @@ import SearchBox from './searchBox';
 import SortBox from './sortBox';
 
 const ToolBar = (props) => {
-    const {value, onSearhChange} = props;
+    const {value, onSearhChange, onSortTypeSelect} = props;
     return (
         <div className="toolbar">
-            <SortBox />
+            <SortBox onSortTypeSelect={onSortTypeSelect}/>
             <SearchBox
                 value={value}
                 onSearhChange={onSearhChange}
