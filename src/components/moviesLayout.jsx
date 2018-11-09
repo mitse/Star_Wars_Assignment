@@ -7,6 +7,7 @@ class MoviesLayout extends Component {
     state = {
         movies: [],
         selectedMovie: null,
+        searchQuery: ""
     };
 
     async componentDidMount() {
@@ -16,13 +17,20 @@ class MoviesLayout extends Component {
 
     handleMovieSelect = (movie) => {
         this.setState({ selectedMovie: movie });
-      }
+    }
+
+    handleSearch = (text) => {
+        this.setState({ searchQuery: text });
+    }
 
     render() {
-        const {movies, selectedMovie} = this.state;
+        const { movies, selectedMovie, searchQuery } = this.state;
         return (
             <main className="container">
-                <ToolBar />
+                <ToolBar
+                    value={searchQuery}
+                    onSearhChange={this.handleSearch}
+                />
                 <Movies
                     movies={movies}
                     selectedMovie={selectedMovie}
