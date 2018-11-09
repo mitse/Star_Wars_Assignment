@@ -1,0 +1,31 @@
+
+.search-box{
+    flex: 1;
+    border: 1px solid #ddd;
+    display: flex;
+    position: relative;
+    margin-left: 1.5em;
+    input{
+        border: none;
+        text-indent: 20px;
+        flex: 1;
+        padding: 10px 5px;
+        transition: 0.2s;
+        background-color: lighten($grey,12%);
+        &:focus{
+            background-color: $white;
+        }
+    } 
+
+    input:focus ~ .fa-search{
+            transform: scale(1.1) translateY(-50%);
+    }
+    .fa-search{
+        position: absolute;
+        font-size: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0.25em;
+        color: darken($grey,30%);
+    }
+}
