@@ -1,0 +1,8 @@
+
+.movies-container{
+    height: 90vh;
+    display: flex;
+    .movies-list, .movie-details{
+        flex-basis: 49%;
+    } 
+}  

@@ -1,0 +1,22 @@
+
+.movies-list {
+    border-collapse: collapse;
+}
+.movies-list tr {
+    cursor: pointer;
+    transition: 0.3s;
+    &:hover {
+      background-color:  lighten($tableColor, 10%) ;
+    }
+}
+.movies-list td {
+    padding: 0.75em;
+    border-bottom: 1px solid $tableColor;
+    &:nth-child(1),  &:nth-child(3){
+        font-size: 14px;
+    }
+    &:nth-child(2){
+        font-weight: 500;
+    }
+   
+}
