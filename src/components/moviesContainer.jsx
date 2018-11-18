@@ -3,13 +3,19 @@ import ToolBar from './toolbar/toolbar';
 import Movies from './movies/movies';
 import getMovies from '../services/movieService';
 
-class MoviesLayout extends Component {
+class MoviesContainer extends Component {
     state = {
         movies: [],
         selectedMovie: null,
         searchQuery: "",
         sortType: ""
     };
+
+    shouldComponentUpdate(nextProps, nextState) {
+        return nextState.sortType !== this.state.sortType || !this.state.sortType 
+               || nextState.searchQuery !== this.state.searchQuery
+               || nextState.selectedMovie !== this.state.selectedMovie;
+    }
 
     async componentDidMount() {
         const movies = await getMovies();
@@ -25,7 +31,6 @@ class MoviesLayout extends Component {
     }
 
     handleSort = (type) => {
-        console.log(type, this.sortType);
         this.setState({ sortType: type });
     }
 
@@ -63,4 +68,4 @@ class MoviesLayout extends Component {
     }
 }
 
-export default MoviesLayout;
+export default MoviesContainer;
