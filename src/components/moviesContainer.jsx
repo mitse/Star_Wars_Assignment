@@ -35,7 +35,7 @@ class MoviesContainer extends Component {
 
     handleSort = (type) => {
         const sMovies = this.sortMovies(type);
-        this.setState({ filteredMovies: sMovies });
+        this.setState({sortType: type, filteredMovies: sMovies });
     }
 
     filterMovies(searchQuery) {
