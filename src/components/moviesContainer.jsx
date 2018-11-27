@@ -8,7 +8,8 @@ class MoviesContainer extends Component {
         movies: [],
         selectedMovie: null,
         searchQuery: "",
-        sortType: ""
+        sortType: "",
+        filteredMovies: []
     };
 
     shouldComponentUpdate(nextProps, nextState) {
@@ -17,9 +18,10 @@ class MoviesContainer extends Component {
                || nextState.selectedMovie !== this.state.selectedMovie;
     }
 
+
     async componentDidMount() {
         const movies = await getMovies();
-        this.setState({ movies });
+        this.setState({ movies, filteredMovies: movies });
     }
 
     handleMovieSelect = (movie) => {
@@ -27,30 +29,35 @@ class MoviesContainer extends Component {
     }
 
     handleSearch = (text) => {
-        this.setState({ searchQuery: text });
+        const fMovies = this.filterMovies(text);
+        this.setState({searchQuery: text, filteredMovies: fMovies });
     }
 
     handleSort = (type) => {
-        this.setState({ sortType: type });
+        const sMovies = this.sortMovies(type);
+        this.setState({ filteredMovies: sMovies });
     }
 
-    getMoviesForList = () => {
-        const { movies, searchQuery, sortType } = this.state;
-        //Filtering
+    filterMovies(searchQuery) {
+        const { movies } = this.state;
+
         const filteredMovies = searchQuery ?
-             movies.filter(movie =>
+        movies.filter(movie =>
                     movie.title.toLowerCase().includes(searchQuery.toLowerCase()))
              : movies;
-
-        //Ascending order Sorting  
-        const sorted = filteredMovies.sort((a, b) => a[sortType] - b[sortType]).slice();
-
-        return sorted ? filteredMovies: sorted;
+        return filteredMovies;     
     }
 
+    sortMovies(type) {
+        const {filteredMovies} = this.state;
+        return filteredMovies.sort((a, b) => a[type] - b[type]);
+    }
+
+
     render() {
-        const { selectedMovie, searchQuery } = this.state;
-        const movies = this.getMoviesForList();
+        const { selectedMovie, searchQuery, filteredMovies } = this.state;
+        const movies = filteredMovies;
+
         return (
             <main className="container">
                 <ToolBar
